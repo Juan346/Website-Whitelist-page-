@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conexión Perdida</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animaciones en CSS para simular las de Framer Motion */
+    @keyframes scaleUp {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes scalePulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .scale-up {
+      animation: scaleUp 0.5s forwards;
+    }
+
+    .scale-pulse {
+      animation: scalePulse 2s infinite;
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gray-900 text-white">
+  
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img src="https://media.discordapp.net/attachments/1015628636285575268/1298027480422289561/image.png?ex=6718ba8b&is=6717690b&hm=c926f884f07210111d4a450414a174cf077a2f3609e018d597376f454a8cce7e&=&format=webp&quality=lossless&width=1223&height=671" 
+         alt="SA:MP Background" 
+         class="w-full h-full object-cover opacity-30" />
+  </div>
+
+  <!-- Content -->
+  <div class="z-10 text-center px-4">
+    <div class="mb-8 relative scale-up">
+        <img src="https://cdn.discordapp.com/attachments/1015628636285575268/1298384567291613274/technology.png?ex=67195e5b&is=67180cdb&hm=2141ad5aacc031ea2d4279322992a71f8d09c2e275a6cafb08a69b227d8426f4&" class="w-32 h-32 text-red-500">
+            
+      
+      <div class="absolute inset-0 bg-red-500 rounded-full filter blur-xl opacity-50 scale-pulse"></div>
+    </div>
+
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">Conexión Perdida</h1>
+
+    <p class="text-xl md:text-2xl mb-8 max-w-md mx-auto fade-in" style="animation-delay: 0.4s;">
+      Parece que has perdido la conexión con Los Santos. ¡Intentemos reconectar!
+    </p>
+
+    <div class="fade-in scale-up" style="animation-delay: 0.6s;">
+      <button onclick="handleRetry()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.418 12.004A5.996 5.996 0 0112 18a5.996 5.996 0 01-5.418-5.996 5.996 5.996 0 0110.837-1.126m.418-.804A5.98 5.98 0 0012 6a5.98 5.98 0 00-5.418 3.996" /></svg>
+        Intentar Reconectar
+      </button>
+    </div>
+
+    <div class="mt-8 text-yellow-400 flex items-center justify-center fade-in" style="animation-delay: 0.8s;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 9.793V7.5A1.5 1.5 0 0113 6h1.5m-6 6H8a3 3 0 00-2.995 2.825L5 15.5a1 1 0 01-1-1V9a1 1 0 011-1h7.5m0 0H15m-3.5 0v6.293A1.5 1.5 0 019 15.5V12.5" /></svg>
+      <span>Si el problema persiste, verifica tu conexión a internet.</span>
+    </div>
+  </div>
+
+  <script>
+    function handleRetry() {
+      // Add your retry logic here
+      console.log("Retrying connection...");
+      // Aquí podrías agregar lógica adicional para intentar reconectar
+    }
+  </script>
+</body>
+</html>

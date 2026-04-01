@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cali RP - Whitelist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<style>
+  /* Estilo básico para ocultar la lista de IPs */
+  .ip-list {
+    display: none;
+    /* Comienza oculta */
+  }
+
+  /* Estilo para el botón */
+</style>
+<style>
+  /* Animación de rotación y escala para el ícono */
+  .rotate-scale {
+    animation: rotateScale 2s infinite ease-in-out;
+  }
+
+  @keyframes rotateScale {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: scale(1.2) rotate(180deg);
+    }
+
+    100% {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+
+  /* Parpadeo del texto */
+  .fade {
+    animation: fade 1.5s infinite ease-in-out;
+  }
+
+  @keyframes fade {
+
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Barra de progreso */
+  .progress {
+    animation: progress 3s ease-in-out forwards;
+  }
+
+  @keyframes progress {
+    0% {
+      width: 0%;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  /* Transición para ocultar la pantalla de carga */
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+</style>
+
+<body class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-900">
+
+
+  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900">
+    <div class="relative w-full h-full">
+      <!-- Imagen de fondo -->
+      <img
+        src="https://media.discordapp.net/attachments/1292167236294938727/1299214765503287296/image.png?ex=671d0c4a&is=671bbaca&hm=68df2b7444f15906746bb0937cb77059f74ca770124417cfdd99693c7b1c2caa&=&format=webp&quality=lossless&width=669&height=671"
+        alt="SA:MP Background" class="absolute inset-0 w-full h-full object-cover opacity-30">
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <!-- Contenido de la pantalla de carga -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center">
+          <!-- Ícono giratorio y con escala -->
+          <div class="w-24 h-24 mb-8 mx-auto rotate-scale">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 w-full h-full">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+          </div>
+          <!-- Texto parpadeante -->
+          <h2 class="text-2xl font-bold text-white mb-4 fade">Entrando a cali-rp.com</h2>
+          <!-- Barra de progreso -->
+          <div class="h-2 bg-blue-500 rounded-full max-w-md mx-auto progress"></div>
+          <!-- Texto de preparación, aparece con retraso -->
+          <p class="text-white mt-4 opacity-0 transition-opacity duration-500 delay-1000">Prepárate para la acción en
+            San Andreas...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background image with blur effect -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="https://i.ytimg.com/vi/pmU9fnHUdBU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCMydBmHO2NNr2Df5NpmXzGgascMQ"
+      alt="Los Santos at night" class="object-cover w-full h-full filter blur-md brightness-50" />
+    <div class="absolute inset-0 bg-black/30"></div>
+  </div>
+
+  <!-- Login Card -->
+  <div class="w-full max-w-md bg-black/50 border border-blue-700 shadow-2xl z-10 backdrop-blur-sm">
+    <div class="p-8">
+
+      <!-- Logo -->
+      <div class="flex justify-center mb-8">
+        <div
+          class="w-24 h-24 bg-gradient-to-br from-blue-600 to-pink-500 rounded-lg shadow-lg flex items-center justify-center transform rotate-45">
+          <div class="transform -rotate-45 text-white font-bold text-3xl">Auth</div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-center text-white mb-6">Autorizacion para ingresar al servidor</h2>
+
+      <form id="form" class="space-y-4">
+        <div class="space-y-2">
+
+          <select id="username" placeholder="Ingrese su nombre y apellido"
+            class="w-full bg-black/30 border border-blue-700 text-white placeholder-blue-300 p-2 rounded">
+            <option selected value="">Selecione el metodo de verificacion</option>
+            <option value="1">Direccion IP</option>
+        <!--     <option value="2">ASN</option> -->
+
+          </select>
+
+        </div>
+
+
+        <button id="verificar" type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white p-2 rounded">
+          Autenticarme
+        </button>
+      </form>
+
+      <button id="join" type="submit" class="w-full hidden bg-blue-600 hover:bg-blue-700 text-white p-2 rounded">
+        Entrar al servidor
+      </button>
+      <div id="security-info" class="mt-6 p-4 bg-gray-800 rounded-lg shadow-lg w-96">
+        <div class="flex items-center mb-2">
+          <svg class="text-green-500 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4.5 8-10V5L12 2 4 5v7c0 5.5 8 10 8 10z"></path>
+          </svg>
+          <h3 class="text-lg font-semibold text-slate-600">Información de Seguridad</h3>
+        </div>
+        <p id="loading-message" class="text-gray-400">Cargando información de seguridad...</p>
+        <div id="ip-info" class="">
+          <p class="mb-2 text-slate-400">Tu dirección IP actual:
+            <span id="ip-address" class="hidden font-mono ml-2 text-blue-400"></span><button id="toggleButton"><i
+                class="fas fa-eye"></i></button>
+          </p>
+          <div class="flex items-center text-yellow-400 text-sm">
+            <svg class="w-4 h-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <p>Esta información se usa para proteger tu cuenta. No la compartas.</p>
+          </div>
+        </div>
+        <p id="error-message" class="hidden text-red-500">Error al obtener la información de seguridad.</p>
+      </div>
+    </div>
+    <div class="flex justify-center p-4">
+      <a href="/" class="text-sm text-blue-300 hover:text-purple-100">Volver al inicio</a>
+    </div>
+
+  </div>
+
+</body>
+<script>
+  const toggleButton = document.getElementById('toggleButton');
+  const ipContainer = document.getElementById('ip-address');
+
+  toggleButton.addEventListener('click', function () {
+    // Alternar la visibilidad de la lista de IPs
+    if (ipContainer.style.display === 'none' || ipContainer.style.display === '') {
+      ipContainer.style.display = 'block'; // Muestra la lista
+      toggleButton.innerHTML = '\n <i class="fas fa-eye-slash"></i>'; // Cambia el ícono y texto del botón
+    } else {
+      ipContainer.style.display = 'none'; // Oculta la lista
+      toggleButton.innerHTML = '\n <i class="fas fa-eye"></i>'; // Cambia el ícono y texto del botón
+    }
+  });
+</script>
+<script>
+  // Simulando el proceso de cargar la IP con la API de ipify
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('loading-message').classList.add('hidden');
+
+        document.getElementById('ip-address').textContent = data.ip;
+      })
+      .catch(error => {
+        document.getElementById('loading-message').classList.add('hidden');
+        document.getElementById('error-message').classList.remove('hidden');
+      });
+  });
+</script>
+
+</html>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Oculta la pantalla de carga después de 3 segundos
+    setTimeout(function () {
+      const loadingScreen = document.getElementById("loading-screen");
+      loadingScreen.classList.add("fade-out");
+      loadingScreen.addEventListener("transitionend", function () {
+        loadingScreen.style.display = "none";
+      });
+    }, 3000);
+  });
+</script>
+
+
+<script>
+  document.getElementById('form').addEventListener('submit', function (event) {
+    const selectElement = document.getElementById('username');
+    event.preventDefault();
+
+    if (selectElement.value === "") { // Verifica si el valor está vacío
+      Swal.fire({
+        icon: "error",
+        title: "Algo fallo!",
+        text: "Debes escoger el metodo de verificacion que deseas que se haga.",
+        footer: '<a href="#">¿Por que tengo que hacer esto?</a>'
+      });
+
+      event.preventDefault(); // Evita el envío del formulario
+      return;
+    } else {
+     
+      let timerInterval;
+      Swal.fire({
+        title: "Configurando su acceso!",
+        html: "Estamos preparando todo para recibirte!,<b></b> Esto puede tomar unos segundos.",
+        timer: 30000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const timer = Swal.getPopup().querySelector("b");
+          timerInterval = setInterval(() => {
+            timer.textContent = `${Swal.getTimerLeft()}`;
+          }, 30000);
+
+          const userIP ="<%= ipe  %>";
+          const datos = {
+                ip: userIP,
+            };
+          fetch('/connecting/server', {
+                method: 'POST', // Método POST para enviar los datos
+                headers: {
+                    'Content-Type': 'application/json' // Tipo de contenido JSON
+                },
+                body: JSON.stringify(datos) // Convertir los datos a formato JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Mostrar la respuesta del servidor
+                document.getElementById('resultado').innerText = `Respuesta del servidor: ${data.mensaje}`;
+                console.log("Datos procesados en el servidor:", data.datos);
+
+            })
+        },
+        willClose: () => {
+        
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+
+    }
+
+  });
+
+</script>
+<script src="../src/api.js"></script>
+<!-- Swal.fire({
+    title: "¡Autenticado!",
+    text: "¡Todo marcha bien!, espera un rango entre 10s a 30s para poder disfrutar de este maravilloso servidor.",
+    imageUrl: "https://i.namu.wiki/i/1amaHsm_8oqACDMjJQMSaE2q7IIvgtzqDRcwIrt_ih45Xraqms_FF2jGcXK8DjDfYPQZJlEk48eeQet-HUDFHw.webp",
+   
+    imageAlt: "Custom image",
+    confirmButtonText: 'Entrar'
+}); -->

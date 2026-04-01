@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Cali RP</title>
+</head>
+
+
+<style>
+  
+    /* Estilo para el carrusel */
+    .carousel {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+         /* rounded-lg */
+    }
+
+    .carousel img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 1s ease;
+    }
+
+    .carousel img.inactive {
+        opacity: 0;
+    }
+
+    .carousel img.active {
+        opacity: 1;
+    }
+
+    
+</style>
+<style>
+  /* Animación de rotación y escala para el ícono */
+  .rotate-scale {
+    animation: rotateScale 2s infinite ease-in-out;
+  }
+  @keyframes rotateScale {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+  }
+
+  /* Parpadeo del texto */
+  .fade {
+    animation: fade 1.5s infinite ease-in-out;
+  }
+  @keyframes fade {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* Barra de progreso */
+  .progress {
+    animation: progress 3s ease-in-out forwards;
+  }
+  @keyframes progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  /* Transición para ocultar la pantalla de carga */
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+</style>
+
+<body id="content"  class="min-h-screen dark:bg-blue-800 bg-blue-600 text-yellow-900">
+
+ 
+  
+  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900">
+    <div class="relative w-full h-full">
+      <!-- Imagen de fondo -->
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj1OzBI2lKKU1DdGGK32o6Os9-PMZng8wlbw&s" alt="SA:MP Background" class="absolute inset-0 w-full h-full object-cover opacity-30">
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <!-- Contenido de la pantalla de carga -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center">
+          <!-- Ícono giratorio y con escala -->
+          <div class="w-24 h-24 mb-8 mx-auto rotate-scale">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 w-full h-full">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+            </svg>
+          </div>
+          <!-- Texto parpadeante -->
+          <h2 class="text-2xl font-bold text-white mb-4 fade">Entrando a cali-rp.com</h2>
+          <!-- Barra de progreso -->
+          <div class="h-2 bg-blue-500 rounded-full max-w-md mx-auto progress"></div>
+          <!-- Texto de preparación, aparece con retraso -->
+          <p class="text-white mt-4 opacity-0 transition-opacity duration-500 delay-1000">Prepárate para la acción en San Andreas...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Navegación -->
+    <nav class="bg-gradient-to-r from-blue-900 to-blue-600 p-4  shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+          <div class="text-2xl font-bold text-white">Cali RP</div>
+          
+        </div>
+      </nav>
+      <nav class="bg-gray-50 dark:bg-gray-700">
+        <div class="max-w-screen-xl px-4 py-3 mx-auto">
+            <div class="flex items-center">
+                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                    <li>
+                        <a href="#" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Foro</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Donaciones</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+      <!-- <div id="loader" class="loader"></div>
+     
+          <h1>Contenido Cargado</h1>
+          <p>Este es el contenido de la página que se muestra después de cargar.</p> -->
+      
+    <!-- Hero Section con imagen -->
+    <header class="dark:bg-blue-800 relative h-screen">
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="https://c4.wallpaperflare.com/wallpaper/761/538/470/grand-theft-auto-san-andreas-gta-wallpaper-preview.jpg" alt="SAMP Gameplay" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-blue-600 to-transparent"></div>
+        </div>
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl font-extrabold text-blue-300 drop-shadow-lg">
+                Bienvenido a Cali RP
+            </h1>
+            <p class="mt-3 text-xl text-blue-200 drop-shadow-md">
+                La mejor experiencia de roleplay en San Andreas Multiplayer
+            </p>
+            <div class="mt-5 flex justify-center">
+                <a href="samp://26.30.125.207:7777" class="mr-3 bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-lg text-lg font-semibold">
+                    Unirse al Servidor
+                </a>
+                <a href="#" class="border border-blue-300 text-blue-300 hover:bg-blue-500 hover:text-yellow-900 px-4 py-2 rounded-lg text-lg font-semibold">
+                    Cómo Empezar
+                </a>
+            </div>
+            
+            </div>
+        </div>
+    </header>
+    
+
+    
+    <div class="container mx-auto p-4">
+       
+
+        <div class=" bg-slate-200 mt-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                <div class="border-blue-500 bg-white shadow-lg">
+                    <div class="bg-blue-500 text-white p-4">
+                        <h2 class="text-xl">Últimas Noticias</h2>
+                    </div>
+                    <div class="p-4">
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">⚡</span> Nuevo evento de carreras este fin de semana</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">🗺️</span> Actualización del mapa: Nuevas zonas exploradas</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">🏆</span> Torneo de paintball con premios en efectivo</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="border-blue-500  bg-white shadow-lg">
+                    <div class="bg-blue-500 text-white p-4">
+                        <h2 class="text-xl">Información del Servidor</h2>
+                    </div>
+                    <div class="p-4">
+                        <p class="mb-4">Cali RP ofrece la mejor experiencia de roleplay en SA:MP. Con una comunidad activa y un equipo dedicado, creamos un ambiente inmersivo y divertido para todos los jugadores.</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">👥</span> Más de 500 jugadores diarios</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">⚡</span> Economía dinámica y realista</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">🏆</span> Eventos semanales con premios</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">🛡️</span> Sistema de facciones avanzado</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="border-blue-500 bg-white shadow-lg">
+                    <div class="bg-blue-500 text-white p-4">
+                        <h2 class="text-xl">Próximos Eventos</h2>
+                    </div>
+                    <div class="p-4">
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">⚡</span> 15/05 - Gran inauguración del casino</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">🛡️</span> 20/05 - Torneo de boxeo</li>
+                            <li class="flex items-center"><span class="mr-2 text-blue-500">🗺️</span> 25/05 - Carrera ilegal por la ciudad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-3xl font-bold mb-6 text-center">Nuestra galeria</h1>
+            <div class="my-8 border-blue-500 shadow-lg">
+                <div class="bg-blue-500 text-white p-4">
+                    <h2 class="text-xl text-white">Galería del Servidor</h2>
+                </div>
+                <div class="p-0 carousel">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4yUf12H616DNp7gaSASiNcONc-N2XSRUmfg&s" class="active" alt="Imagen del servidor 1">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4yUf12H616DNp7gaSASiNcONc-N2XSRUmfg&s" class="inactive" alt="Imagen del servidor 2">
+                    <img src="" class="inactive" alt="Imagen del servidor 3">
+                    <img src="https://media.discordapp.net/attachments/1015628636285575268/1298031221619818528/image.png?ex=67181547&is=6716c3c7&hm=9afcb617de04a84dbd499431e95faa589bafdf65f75b18d3fc817b2f9a0a9760&=&format=webp&quality=lossless&width=1202&height=671" class="inactive" alt="Imagen del servidor 4">
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                        <button class="w-3 h-3 rounded-full bg-blue-500"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+            
+          <!-- Top Players Ranking -->
+          <div class="bg-white shadow-md rounded-lg p-4 md:col-span-2">
+            
+            <div class="flex items-center mb-4">
+              <svg class="mr-2 h-6 w-6 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4a2 2 0 002 2h10a2 2 0 002-2V3M4 21h16M12 11v10m-6 0h12"/>
+              </svg>
+              <h2 class="text-lg font-semibold">Top 5 Jugadores</h2>
+            </div>
+            <table class="w-full table-auto">
+              <thead>
+                <tr class="border-b">
+                  <th class="w-12 text-left">Rank</th>
+                  <th class="text-left">Jugador</th>
+                  <th class="text-right">Puntuación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b">
+                  <td class="font-medium">1</td>
+                  <td class="flex items-center">
+                    <img src="/placeholder.svg?height=32&width=32" alt="xXDarkSniperXx" class="h-8 w-8 mr-2 rounded-full"/>
+                    xXDarkSniperXx
+                  </td>
+                  <td class="text-right">10000</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="font-medium">2</td>
+                  <td class="flex items-center">
+                    <img src="/placeholder.svg?height=32&width=32" alt="ProGamer123" class="h-8 w-8 mr-2 rounded-full"/>
+                    ProGamer123
+                  </td>
+                  <td class="text-right">9500</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="font-medium">3</td>
+                  <td class="flex items-center">
+                    <img src="/placeholder.svg?height=32&width=32" alt="NoobMaster69" class="h-8 w-8 mr-2 rounded-full"/>
+                    NoobMaster69
+                  </td>
+                  <td class="text-right">9000</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="font-medium">4</td>
+                  <td class="flex items-center">
+                    <img src="/placeholder.svg?height=32&width=32" alt="ElitePlayer" class="h-8 w-8 mr-2 rounded-full"/>
+                    ElitePlayer
+                  </td>
+                  <td class="text-right">8500</td>
+                </tr>
+                <tr>
+                  <td class="font-medium">5</td>
+                  <td class="flex items-center">
+                    <img src="/placeholder.svg?height=32&width=32" alt="SAMPLegend" class="h-8 w-8 mr-2 rounded-full"/>
+                    SAMPLegend
+                  </td>
+                  <td class="text-right">8000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bg-white shadow-md rounded-lg p-4">
+            <h2 class="text-lg font-semibold mb-4">Descubre Cali RP</h2>
+            <div class="relative" style="padding-bottom: 56.25%">
+              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/Jgt0pd" title="Cali RP Promotional Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        
+          <!-- Online Players List -->
+          <div class="bg-white shadow-md rounded-lg p-4">
+            <div class="flex items-center mb-4">
+              <svg class="mr-2 h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-8 0v2m8-10a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+              <h2 class="text-lg font-semibold">Jugadores en Línea</h2>
+            </div>
+            <div class="overflow-y-auto h-64">
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="font-medium">Player1</p>
+                    <p class="text-sm text-gray-500">Nivel 10</p>
+                  </div>
+                  <span class="bg-blue-100 text-blue-600 text-sm font-medium px-2.5 py-0.5 rounded">Police</span>
+                </div>
+                <hr>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="font-medium">Player2</p>
+                    <p class="text-sm text-gray-500">Nivel 15</p>
+                  </div>
+                  <span class="bg-red-100 text-red-600 text-sm font-medium px-2.5 py-0.5 rounded">Mafia</span>
+                </div>
+                <hr>
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="font-medium">Player3</p>
+                    <p class="text-sm text-gray-500">Nivel 8</p>
+                  </div>
+                  <span class="bg-gray-100 text-gray-600 text-sm font-medium px-2.5 py-0.5 rounded">Civilian</span>
+                </div>
+                <!-- More players... -->
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Server Features -->
+        <div class="container mx-auto p-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <!-- Discord Iframe -->
+              <div class="bg-white shadow-md rounded-lg p-4 lg:col-span-2">
+                <div class="flex items-center mb-4">
+                  <svg class="mr-2 h-6 w-6 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21l-7-5.5L5 21V5l7-3 7 3v16z"/>
+                  </svg>
+                  <h2 class="text-lg font-semibold">Únete a nuestra comunidad de Discord</h2>
+                </div>
+                <iframe src="https://discord.com/widget?id=830581965648166991&theme=dark" width="100%" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+              </div>
+          
+              <!-- Server Features -->
+              <div class="bg-white shadow-md rounded-lg p-4">
+                <h2 class="text-lg font-semibold mb-4">¿Por qué jugar en Cali RP?</h2>
+                <div class="space-y-4">
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V10l-7-7H2v18h15z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Comunidad Activa</h3>
+                      <p class="text-sm text-gray-500">Únete a cientos de jugadores en línea</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.105 0-2 .672-2 1.5S10.895 11 12 11s2-.672 2-1.5S13.105 8 12 8zM5 20h14v-2H5v2z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Economía Dinámica</h3>
+                      <p class="text-sm text-gray-500">Gana dinero, compra propiedades y vehículos</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6M9 6h6M9 18h6"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Sistema de Facciones</h3>
+                      <p class="text-sm text-gray-500">Únete a la policía, mafia, médicos y más</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l9 4.5v11L12 22 3 17.5V6.5L12 2z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Mapa Personalizado</h3>
+                      <p class="text-sm text-gray-500">Explora nuestra versión única de Los Santos</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l9 4.5v11L12 22 3 17.5V6.5L12 2z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Mapa Personalizado</h3>
+                      <p class="text-sm text-gray-500">Explora nuestra versión única de Los Santos</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l9 4.5v11L12 22 3 17.5V6.5L12 2z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Mapa Personalizado</h3>
+                      <p class="text-sm text-gray-500">Explora nuestra versión única de Los Santos</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l9 4.5v11L12 22 3 17.5V6.5L12 2z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Mapa Personalizado</h3>
+                      <p class="text-sm text-gray-500">Explora nuestra versión única de Los Santos</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <svg class="h-8 w-8 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l9 4.5v11L12 22 3 17.5V6.5L12 2z"/>
+                    </svg>
+                    <div>
+                      <h3 class="font-semibold">Mapa Personalizado</h3>
+                      <p class="text-sm text-gray-500">Explora nuestra versión única de Los Santos</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      
+      
+    <!-- Pie de Página -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="container mx-auto px-4 py-8">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+              <img src="/placeholder.svg?height=60&width=200" alt="Cali RP Logo" class="mb-4" width="200" height="60" />
+              <p class="text-sm">
+                Cali RP es el servidor líder de SA:MP en Latinoamérica. Únete a nuestra comunidad y vive la mejor experiencia de roleplay en San Andreas.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-4">Enlaces Rápidos</h3>
+              <ul class="space-y-2">
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Inicio</a></li>
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Foro</a></li>
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Donaciones</a></li>
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Reglas</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-4">Comunidad</h3>
+              <ul class="space-y-2">
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Discord</a></li>
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Teamspeak</a></li>
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Eventos</a></li>
+                <li><a href="#" class="hover:text-yellow-400 transition-colors">Galería</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-sm text-gray-400">&copy; 2023 Cali RP. Todos los derechos reservados.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+                  <!-- Facebook Icon -->
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+                  <!-- Twitter Icon -->
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+                  <!-- Instagram Icon -->
+                </svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+                  <!-- YouTube Icon -->
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      
+        <div class="relative h-48 mt-8">
+          <img src="https://assets.games.gg/Metro_Rivals_New_York_Now_on_Epic_Games_f1d654e1c9.png" alt="SA:MP City Skyline" class="w-full h-full object-cover opacity-50" />
+          <div class="absolute inset-0 bg-gradient-to-t from-blue-900 to-transparent"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <p class="text-3xl font-bold text-white drop-shadow-lg mb-2">Únete a Cali RP</p>
+              <p class="text-xl text-blue-200 font-semibold drop-shadow-lg">samp.calirp.com:7777</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+</body>
+</html>
+
+<script>
+    // Carrusel de imágenes
+    const images = document.querySelectorAll('.carousel img');
+    const buttons = document.querySelectorAll('.carousel button');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        images[currentIndex].classList.remove('active');
+        images[currentIndex].classList.add('inactive');
+        buttons[currentIndex].classList.remove('bg-blue-500');
+        buttons[currentIndex].classList.add('bg-gray-300');
+
+        currentIndex = index;
+
+        images[currentIndex].classList.remove('inactive');
+        images[currentIndex].classList.add('active');
+        buttons[currentIndex].classList.remove('bg-gray-300');
+        buttons[currentIndex].classList.add('bg-blue-500');
+    }
+
+    buttons.forEach((button, index) => {
+        button.addEventListener('click', () => showImage(index));
+    });
+
+    // Cambiar imagen automáticamente cada 5 segundos
+    setInterval(() => {
+        const nextIndex = (currentIndex + 1) % images.length;
+        showImage(nextIndex);
+    }, 5000);
+
+   
+
+
+</script>
+
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Oculta la pantalla de carga después de 3 segundos
+    setTimeout(function () {
+      const loadingScreen = document.getElementById("loading-screen");
+      loadingScreen.classList.add("fade-out");
+      loadingScreen.addEventListener("transitionend", function () {
+        loadingScreen.style.display = "none";
+      });
+    }, 3000);
+  });
+</script>
+
+</script>
